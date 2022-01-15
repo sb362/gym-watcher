@@ -8,7 +8,7 @@ import matplotlib.pyplot as plot, matplotlib.dates as dates
 plot.gca().xaxis.set_major_formatter(dates.DateFormatter('%H:%S'))
 plot.gca().xaxis.set_major_locator(dates.HourLocator())
 
-with open("occupancy2.csv", "r") as f:
+with open("occupancy.csv", "r") as f:
 	reader = csv.reader(f)
 
 	per_day = {day_abbr: [] for day_abbr in calendar.day_abbr}
@@ -39,7 +39,6 @@ plot.axvline(x=ten_thirty_pm, color="black", linestyle="--")
 if "Sat" in per_day or "Sun" in per_day:
 	if "Sun" in per_day:
 		plot.axvline(x=nine_pm, color="black", linestyle="--")
-
 	plot.axvline(x=eight_am, color="black", linestyle="--")
 """
 
@@ -47,6 +46,7 @@ plot.gcf().autofmt_xdate()
 
 plot.ylabel("Gym occupancy (%)")
 plot.xlabel("Time (HH:MM)")
+plot.ylim((0, 100))
 plot.grid()
 plot.legend()
 plot.show()
