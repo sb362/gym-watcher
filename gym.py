@@ -3,7 +3,7 @@ import requests
 import time
 
 from bs4 import BeautifulSoup
-from threading import Timer
+from datetime import datetime
 from twisted.internet import task, reactor
 
 user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/97.0.4692.71 Safari/537.36"
@@ -36,12 +36,12 @@ def fetch_and_save():
   t = time.time()
   try:
     occ = fetch_occupancy()
-    print(t, occ)
+    print(datetime.fromtimestamp(t), occ)
     
     with open("occupancy.csv", mode="a") as f:
       f.write(f"{t},{occ}\n")
   except RuntimeError as err:
-    print(t, err)
+    print(datetime.fromtimestamp(t), err)
 
 if __name__ == "__main__":
   interval = 5 * 60
